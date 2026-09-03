@@ -16,9 +16,9 @@ CC = cc
 CFLAGS	= -Wall -Wextra -Werror
 
 AR = ar rcs
-RM = rm -fclean
+RM = rm -f
 
-SRCS	=
+SRCS	= ft_printf.c ft_print_format.c ft_helper.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -28,10 +28,10 @@ $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
 %.o: %.c ft_printf.h
-	&(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) &(OBJS)
+	$(RM) $(OBJS)
 
 fclean:	clean
 	$(RM) $(NAME)
