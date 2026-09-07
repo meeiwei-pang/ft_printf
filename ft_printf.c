@@ -11,58 +11,52 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
+
 int	ft_printf(const char *format, ...)
 {
-	int	count;
+	int		count;
 	va_list	ap;
 
 	count = 0;
 	va_start(ap, format);
-	while (*format != '\0')
-	{
-		if (*format == '%' && *(format + 1) == '%')
-			count += write (1, format++, 1);
-		else if (*format == '%')
-			count += ft_print_format (++format, &ap);
-		else
-			count += write (1, format, 1);
-		format++;
-	}
-	va_end (ap);
-	return (count);
-}
-*/
-int	ft_printf(const char *format, ...)
-{
-	int	count;
-	va_list	ap;
-
-	count = 0;
-	va_start(ap, format);
-	while (*format != '\0')
+	while (*format)
 	{
 		if (*format == '%' && *(format + 1) == '%')
 		{
 			count += write (1, format, 1);
 			format += 2;
 		}
-		else if (*format == '%' && *(format + 1) == '\0')
-		{
-			count += write(1, format, 1);
-			format += 1;
-		}
-		else if (*format == '%')
+		else if (*format == '%' && *(format + 1))
 		{
 			count += ft_print_format (++format, &ap);
-			format += 1;
+			format ++;
 		}
 		else
 		{
 			count += write (1, format, 1);
-			format += 1;
+			format ++;
 		}
 	}
 	va_end (ap);
 	return (count);
 }
+
+/*
+#include <stdio.h>
+int	main(void)
+{
+	int	written;
+	int	test_var = 42;
+
+	written = ft_printf(
+				"Hello %s, you are %d years old (%x, %X, %u, %p, %%, %i)\n",
+ 							"World", 42, 42, 42, 42, (void *)&test_var, 42);
+	ft_printf("Characters written: %d\n", written);
+
+	written = printf("Hello %s, you are %d years old (%x, %X, %u, %p, %%, %i)\n",
+						"World", 42, 42, 42, 42, (void *)&test_var, 42);
+	printf("Characters written: %d\n", written);
+
+	return (0);
+}
+*/
