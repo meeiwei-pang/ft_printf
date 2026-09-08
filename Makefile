@@ -19,7 +19,7 @@ AR = ar rcs
 RM = rm -f
 
 SRCS	= ft_printf.c ft_print_format.c ft_printchar.c ft_printstr.c \
-			ft_printnbr_SUH.c ft_printstr.c
+			ft_printnbr_SUH.c ft_printptr.c
 
 OBJS		= $(SRCS:.c=.o)
 
